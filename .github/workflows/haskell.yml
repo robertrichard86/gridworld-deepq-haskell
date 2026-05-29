@@ -1,0 +1,52 @@
+name: Haskell CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ghc-version: ['9.6.6']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Haskell
+      uses: haskell-actions/setup@v2
+      with:
+        ghc-version: ${{ matrix.ghc-version }}
+        enable-stack: true
+        stack-version: 'latest'
+
+    - name: Cache Stack
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.stack
+          .stack-work
+        key: ${{ runner.os }}-stack-${{ hashFiles('stack.yaml.lock', 'package.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-stack-
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y liblapack-dev libblas-dev
+
+    - name: Build
+      run: stack build --system-ghc
+
+    - name: Run tests
+      run: stack test --system-ghc
+
+    - name: Run executable (quick test)
+      run: timeout 60 stack exec gridworld-deepq --system-ghc || true

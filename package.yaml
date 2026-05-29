@@ -1,0 +1,63 @@
+name:                gridworld-deepq-haskell
+version:             0.1.0.0
+github:              "robertrichard86/gridworld-deepq-haskell"
+license:             MIT
+author:              "Robert Richard"
+maintainer:          "robertrichard86@github.com"
+copyright:           "2026 Robert Richard"
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+synopsis:            Deep Q-Learning agent for Grid World in Haskell
+category:            AI
+description:         Educational implementation of a Deep Q-Learning agent that learns to navigate a 5x5 Grid World using a neural network for Q-value approximation.
+
+dependencies:
+- base >= 4.7 && < 5
+- hmatrix >= 0.20
+- vector >= 0.12
+- random >= 1.2
+- containers >= 0.6
+- mtl >= 2.2
+- deepseq >= 1.4
+
+default-extensions:
+- ScopedTypeVariables
+- BangPatterns
+- DeriveGeneric
+- StrictData
+
+library:
+  source-dirs: src
+  ghc-options:
+  - -Wall
+  - -O2
+
+executables:
+  gridworld-deepq:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -Wall
+    - -O2
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - gridworld-deepq-haskell
+
+tests:
+  gridworld-deepq-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - gridworld-deepq-haskell
+    - hspec >= 2.7
+    - QuickCheck >= 2.14

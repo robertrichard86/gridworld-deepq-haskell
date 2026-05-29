@@ -1,0 +1,16 @@
+{
+  "name": "Dungeon AI - Deep Q-Learning Haskell",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "postCreateCommand": "curl -sSL https://get.haskellstack.org/ | sh && sudo apt-get update && sudo apt-get install -y liblapack-dev libblas-dev libgsl-dev && stack setup && stack build --only-dependencies",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "haskell.haskell",
+        "justusadam.language-haskell"
+      ]
+    }
+  }
+}
