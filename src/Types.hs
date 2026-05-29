@@ -60,12 +60,6 @@ data GridWorld = GridWorld
 
 instance NFData GridWorld
 
-instance NFData (Vector Double) where
-  rnf v = v `seq` ()
-
-instance NFData (Matrix Double) where
-  rnf m = m `seq` ()
-
 data Experience = Experience
   { expState      :: Vector Double
   , expAction     :: Action
