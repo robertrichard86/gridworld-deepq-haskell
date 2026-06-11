@@ -428,7 +428,7 @@ stack exec gridworld-deepq
 
 ## 🧪 Testes
 
-O projeto inclui uma suíte de testes abrangente utilizando **HSpec** e **QuickCheck**, cobrindo todos os módulos principais.
+O projeto inclui uma suíte de testes abrangente utilizando **HSpec**, cobrindo todos os módulos principais.
 
 ### Executar os Testes
 
@@ -484,7 +484,7 @@ Agent
   selectAction returns valid action
 
 Finished in 0.0234 seconds
-26 examples, 0 failures
+28 examples, 0 failures
 ```
 
 ---
